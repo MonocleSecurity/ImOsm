@@ -1,7 +1,7 @@
 #pragma once
 #include <array>
 #include <curl/curl.h>
-#include <filesystem>
+#include <ghc/filesystem.hpp>
 #include <future>
 #include <memory>
 #include <string>
@@ -20,7 +20,7 @@ private:
   std::string _clientName{"curl"};
   std::string _tileProvider{"http://a.tile.openstreetmap.org/"};
   std::string _tileExtension{".png"};
-  std::string _tileSavePath{std::filesystem::current_path().string() +
+  std::string _tileSavePath{ghc::filesystem::current_path().string() +
                             "/tiles"};
   int _maxParallelGrab{4};
 

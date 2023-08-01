@@ -1,7 +1,7 @@
 #pragma once
 #include "ImOsmITileSaver.h"
 #include "ImOsmTileSourceFs.h"
-#include <filesystem>
+#include <ghc/filesystem.hpp>
 
 namespace ImOsm {
 class ITile;
@@ -16,7 +16,7 @@ public:
   virtual bool save(std::shared_ptr<ITile> tile) const override;
 
 protected:
-  virtual std::filesystem::path dirPath(std::shared_ptr<ITile>) const = 0;
+  virtual ghc::filesystem::path dirPath(std::shared_ptr<ITile>) const = 0;
   virtual std::string fileName(std::shared_ptr<ITile> tile) const;
 };
 
@@ -25,15 +25,15 @@ protected:
 class TileSaverDir : public TileSaver {
 public:
   TileSaverDir();
-  TileSaverDir(const std::filesystem::path &basePath);
+  TileSaverDir(const ghc::filesystem::path &basePath);
   virtual ~TileSaverDir();
 
 protected:
-  virtual std::filesystem::path
+  virtual ghc::filesystem::path
   dirPath(std::shared_ptr<ITile> tile) const override;
 
 private:
-  std::filesystem::path _basePath{TileSourceFs::BasePathDefault()};
+  ghc::filesystem::path _basePath{TileSourceFs::BasePathDefault()};
 };
 
 // -----------------------------------------------------------------------------
@@ -41,15 +41,15 @@ private:
 class TileSaverSubDir : public TileSaver {
 public:
   TileSaverSubDir();
-  TileSaverSubDir(const std::filesystem::path &basePath);
+  TileSaverSubDir(const ghc::filesystem::path &basePath);
   virtual ~TileSaverSubDir();
 
 protected:
-  virtual std::filesystem::path
+  virtual ghc::filesystem::path
   dirPath(std::shared_ptr<ITile> tile) const override;
 
 private:
-  std::filesystem::path _basePath{TileSourceFs::BasePathDefault()};
+  ghc::filesystem::path _basePath{TileSourceFs::BasePathDefault()};
 };
 
 } // namespace ImOsm

@@ -4,7 +4,7 @@
 
 namespace ImOsm {
 TileSourceFs::TileSourceFs(int requestLimit, bool preload,
-                           const std::filesystem::path &basePath)
+                           const ghc::filesystem::path &basePath)
     : TileSourceAsync{requestLimit, preload}, _basePath{basePath} {}
 
 std::string TileSourceFs::FileName(int z, int x, int y) {
@@ -13,8 +13,8 @@ std::string TileSourceFs::FileName(int z, int x, int y) {
   return fname_maker.str();
 }
 
-std::filesystem::path TileSourceFs::BasePathDefault() {
-  return std::filesystem::current_path().append("tiles");
+ghc::filesystem::path TileSourceFs::BasePathDefault() {
+  return ghc::filesystem::current_path().append("tiles");
 }
 
 bool TileSourceFs::receiveTile(int z, int x, int y, TileData &tileData) {
@@ -34,25 +34,25 @@ bool TileSourceFs::receiveTile(int z, int x, int y, TileData &tileData) {
 // -----------------------------------------------------------------------------
 
 TileSourceFsDir::TileSourceFsDir(int requestLimit, bool preload,
-                                 const std::filesystem::path &basePath)
+                                 const ghc::filesystem::path &basePath)
     : TileSourceFs{requestLimit, preload, basePath} {}
 
-std::filesystem::path TileSourceFsDir::dirPath(int z, int x, int y) const {
+ghc::filesystem::path TileSourceFsDir::dirPath(int z, int x, int y) const {
   return DirPath(basePath(), z, x, y);
 }
 // -----------------------------------------------------------------------------
 
 TileSourceFsSubDir::TileSourceFsSubDir(int requestLimit, bool preload,
-                                       const std::filesystem::path &basePath)
+                                       const ghc::filesystem::path &basePath)
     : TileSourceFs{requestLimit, preload, basePath} {}
 
-std::filesystem::path
-TileSourceFsSubDir::DirPath(std::filesystem::path basePath, int z, int x,
+ghc::filesystem::path
+TileSourceFsSubDir::DirPath(ghc::filesystem::path basePath, int z, int x,
                             int y) {
   return basePath.append(std::to_string(z));
 }
 
-std::filesystem::path TileSourceFsSubDir::dirPath(int z, int x, int y) const {
+ghc::filesystem::path TileSourceFsSubDir::dirPath(int z, int x, int y) const {
   return DirPath(basePath(), z, x, y);
 }
 

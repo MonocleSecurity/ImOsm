@@ -100,8 +100,8 @@ size_t TileGrabberUrl::onPullResponse(void *data, size_t size, size_t nmemb,
 void TileGrabberUrl::saveFile(Tile &tile) {
   std::ostringstream pathmaker;
   pathmaker << _tileSavePath << '/' << tile.zxy[0] << '/' << tile.zxy[1];
-  if (!std::filesystem::exists(pathmaker.str())) {
-    std::filesystem::create_directories(pathmaker.str());
+  if (!ghc::filesystem::exists(pathmaker.str())) {
+    ghc::filesystem::create_directories(pathmaker.str());
   }
   pathmaker << '/' << tile.zxy[0] << '-' << tile.zxy[1] << '-' << tile.zxy[2]
             << _tileExtension;

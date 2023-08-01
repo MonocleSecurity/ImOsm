@@ -1,25 +1,25 @@
 #pragma once
 #include "ImOsmTileSourceAsync.h"
-#include <filesystem>
+#include <ghc/filesystem.hpp>
 
 namespace ImOsm {
 class TileSourceFs : public TileSourceAsync {
 public:
   TileSourceFs(int requestLimit, bool preload,
-               const std::filesystem::path &basePath);
+               const ghc::filesystem::path &basePath);
   virtual ~TileSourceFs() = default;
 
   static std::string FileName(int z, int x, int y);
-  static std::filesystem::path BasePathDefault();
+  static ghc::filesystem::path BasePathDefault();
 
 protected:
   virtual bool receiveTile(int z, int x, int y, TileData &tileData) override;
-  inline std::filesystem::path basePath() const { return _basePath; }
+  inline ghc::filesystem::path basePath() const { return _basePath; }
 
-  virtual std::filesystem::path dirPath(int z, int x, int y) const = 0;
+  virtual ghc::filesystem::path dirPath(int z, int x, int y) const = 0;
 
 private:
-  std::filesystem::path _basePath{BasePathDefault()};
+  ghc::filesystem::path _basePath{BasePathDefault()};
 };
 
 // -----------------------------------------------------------------------------
@@ -27,10 +27,10 @@ private:
 class TileSourceFsDir : public TileSourceFs {
 public:
   TileSourceFsDir(int requestLimit, bool preload,
-                  const std::filesystem::path &basePath);
+                  const ghc::filesystem::path &basePath);
   virtual ~TileSourceFsDir() = default;
 
-  static std::filesystem::path DirPath(std::filesystem::path basePath,
+  static ghc::filesystem::path DirPath(ghc::filesystem::path basePath,
                                        [[maybe_unused]] int z,
                                        [[maybe_unused]] int x,
                                        [[maybe_unused]] int y) {
@@ -38,7 +38,7 @@ public:
   }
 
 protected:
-  virtual std::filesystem::path dirPath(int z, int x, int y) const override;
+  virtual ghc::filesystem::path dirPath(int z, int x, int y) const override;
 };
 
 // -----------------------------------------------------------------------------
@@ -46,15 +46,15 @@ protected:
 class TileSourceFsSubDir : public TileSourceFs {
 public:
   TileSourceFsSubDir(int requestLimit, bool preload,
-                     const std::filesystem::path &basePath);
+                     const ghc::filesystem::path &basePath);
   virtual ~TileSourceFsSubDir() = default;
 
-  static std::filesystem::path DirPath(std::filesystem::path basePath, int z,
+  static ghc::filesystem::path DirPath(ghc::filesystem::path basePath, int z,
                                        [[maybe_unused]] int x,
                                        [[maybe_unused]] int y);
 
 protected:
-  virtual std::filesystem::path dirPath(int z, int x, int y) const override;
+  virtual ghc::filesystem::path dirPath(int z, int x, int y) const override;
 };
 
 } // namespace ImOsm
