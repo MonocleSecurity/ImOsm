@@ -10,10 +10,10 @@ TileTexture::TileTexture(int size, TextureColor color)
   _blob.resize(_width * _height * TextureColor::RGBA_SZ);
   _blob.shrink_to_fit();
   for (size_t i = 0; i != _blob.size(); i = i + TextureColor::RGBA_SZ) {
-    _blob[i] = unsigned char(color.rgba[0]);
-    _blob[i + 1] = unsigned char(color.rgba[1]);
-    _blob[i + 2] = unsigned char(color.rgba[2]);
-    _blob[i + 3] = unsigned char(color.rgba[3]);
+    _blob[i] = (unsigned char)(color.rgba[0]);
+    _blob[i + 1] = (unsigned char)(color.rgba[1]);
+    _blob[i + 2] = (unsigned char)(color.rgba[2]);
+    _blob[i + 3] = (unsigned char)(color.rgba[3]);
   }
 }
 
