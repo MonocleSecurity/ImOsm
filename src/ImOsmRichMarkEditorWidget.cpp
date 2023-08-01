@@ -2,7 +2,7 @@
 #include "ImOsmRichMapPlot.h"
 #include "ImOsmRichMarkItem.h"
 #include "ImOsmRichMarkItemWidget.h"
-#include <misc/cpp/imgui_stdlib.h>
+#include <imgui_stdlib.h>
 
 namespace ImOsm {
 namespace Rich {

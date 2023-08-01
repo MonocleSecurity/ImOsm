@@ -26,7 +26,7 @@ private:
 
   struct Tile {
     struct Remote {
-      std::vector<std::byte> blob;
+      std::vector<unsigned char> blob;
       CURLcode code{CURLE_OK};
     };
     std::array<int, 3> zxy{0, 0, 0};

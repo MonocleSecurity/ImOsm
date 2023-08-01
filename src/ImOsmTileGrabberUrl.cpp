@@ -91,7 +91,7 @@ size_t TileGrabberUrl::onPullResponse(void *data, size_t size, size_t nmemb,
                                       void *userp) {
   size_t realsize{size * nmemb};
   auto &tile{*static_cast<Tile::Remote *>(userp)};
-  auto const *const dataptr{static_cast<std::byte *>(data)};
+  auto const *const dataptr{static_cast<unsigned char *>(data)};
   tile.blob.insert(tile.blob.cend(), dataptr, dataptr + realsize);
 
   return realsize;

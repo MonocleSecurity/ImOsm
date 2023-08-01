@@ -1,9 +1,15 @@
 #include "ImOsmTile.h"
+
+#ifdef _WIN32
+  #include <windows.h>
+#endif
+
 #include <GL/gl.h>
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 namespace ImOsm {
-ImOsm::Tile::Tile(int z, int x, int y, const std::vector<std::byte> &rawBlob,
+ImOsm::Tile::Tile(int z, int x, int y, const std::vector<unsigned char> &rawBlob,
                   bool preload)
     : TileDummy(z, x, y), _rawBlob{rawBlob} {
   if (preload) {
@@ -21,13 +27,13 @@ const char *Tile::rawBlob() const {
   return reinterpret_cast<const char *>(_rawBlob.data());
 }
 
-std::size_t Tile::rawBlobSize() const { return _rawBlob.size(); }
+size_t Tile::rawBlobSize() const { return _rawBlob.size(); }
 
 const char *Tile::rgbaBlob() const {
   return reinterpret_cast<const char *>(_rgbaBlob.data());
 }
 
-std::size_t Tile::rgbaBlobSize() const { return _rgbaBlob.size(); }
+size_t Tile::rgbaBlobSize() const { return _rgbaBlob.size(); }
 
 ImTextureID Tile::texture() const {
   return (ImTextureID)(intptr_t)glID();
@@ -53,7 +59,7 @@ void Tile::stbLoad() const {
     const std::size_t nbytes{std::size_t(_pxW * _pxH * STBI_rgb_alpha)};
     _rgbaBlob.resize(nbytes);
     _rgbaBlob.shrink_to_fit();
-    const auto byteptr{reinterpret_cast<std::byte *>(ptr)};
+    const auto byteptr{reinterpret_cast<unsigned char *>(ptr)};
     _rgbaBlob.insert(_rgbaBlob.begin(), byteptr, byteptr + nbytes);
     stbi_image_free(ptr);
   }

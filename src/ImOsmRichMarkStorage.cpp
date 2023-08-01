@@ -31,7 +31,7 @@ GeoCoords MarkStorage::findMark(const std::string &name, bool &ok) const {
 
 void MarkStorage::loadState(const mINI::INIStructure &ini) {
   for (auto it{ini.begin()}; it != ini.end(); ++it) {
-    if (it->first.starts_with("mark_")) {
+    if (it->first.compare(0, 5, "mark_") == 0) {
       auto ptr{std::make_shared<MarkItem>()};
       if (it->second.has("text")) {
         ptr->setText(it->second.get("text"));

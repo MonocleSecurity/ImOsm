@@ -6,7 +6,7 @@
 #include "ImOsmTileSourceUrlImpl.h"
 #include <cmath>
 #include <imgui.h>
-#include <misc/cpp/imgui_stdlib.h>
+#include <imgui_stdlib.h>
 #include <string>
 
 namespace ImOsm {

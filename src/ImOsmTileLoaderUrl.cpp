@@ -1,4 +1,9 @@
 #include "ImOsmTileLoaderUrl.h"
+
+#ifdef _WIN32
+  #include <windows.h>
+#endif
+
 #include <GL/gl.h>
 #include <algorithm>
 #include <chrono>
@@ -8,6 +13,7 @@
 #include <memory>
 #include <sstream>
 #include <thread>
+
 using namespace std::chrono_literals;
 
 namespace ImOsm {
@@ -109,8 +115,8 @@ TileLoaderUrl::onHandleRequest(const std::array<int, 3> &zxy) {
 size_t TileLoaderUrl::onPullResponse(void *data, size_t size, size_t nmemb,
                                      void *userp) {
   size_t realsize{size * nmemb};
-  auto &blob{*static_cast<std::vector<std::byte> *>(userp)};
-  auto const *const dataptr{static_cast<std::byte *>(data)};
+  auto &blob{*static_cast<std::vector<unsigned char> *>(userp)};
+  auto const *const dataptr{static_cast<unsigned char *>(data)};
   blob.insert(blob.cend(), dataptr, dataptr + realsize);
 
   return realsize;

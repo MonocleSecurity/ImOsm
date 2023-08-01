@@ -1,14 +1,14 @@
 #include "ImOsmRichMarkItemWidget.h"
 #include "ImOsmRichMarkItem.h"
-#include <misc/cpp/imgui_stdlib.h>
+#include <imgui_stdlib.h>
 
 namespace ImOsm {
 namespace Rich {
 
 struct MarkItemWidget::Ui {
-  inline static constexpr char latLonFormat[]{"%.6f"};
+  inline static constexpr char latLonFormat[5]{"%.6f"};
   std::array<float, 2> latLon{};
-  inline static constexpr char radiusFormat[]{"%.0f"};
+  inline static constexpr char radiusFormat[5]{"%.0f"};
   float radius{};
   std::string text;
   std::string markerTypeName;

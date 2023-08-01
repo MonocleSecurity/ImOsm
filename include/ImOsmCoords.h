@@ -4,14 +4,13 @@
 #include <array>
 #include <latlon.h>
 #include <math.h>
-#include <numbers>
 
 namespace ImOsm {
 
-inline constexpr double PI{std::numbers::pi_v<double>};
-inline constexpr double PI2{std::numbers::pi_v<double> * 2.0};
-inline constexpr double RAD{std::numbers::pi_v<double> / 180.0};
-inline constexpr double DEG{180.0 / std::numbers::pi_v<double>};
+inline constexpr double PI{ 3.14159265359 };
+inline constexpr double PI2{PI * 2.0};
+inline constexpr double RAD{ PI / 180.0 };
+inline constexpr double DEG{ 180.0 / PI };
 inline constexpr int POW2[]{
     (1 << 0),  (1 << 1),  (1 << 2),  (1 << 3),  (1 << 4),  (1 << 5),  (1 << 6),
     (1 << 7),  (1 << 8),  (1 << 9),  (1 << 10), (1 << 11), (1 << 12), (1 << 13),

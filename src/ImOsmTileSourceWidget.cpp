@@ -2,7 +2,7 @@
 #include "ImOsmMapPlot.h"
 #include "ImOsmTileLoaderImpl.h"
 #include <imgui.h>
-#include <misc/cpp/imgui_stdlib.h>
+#include <imgui_stdlib.h>
 
 namespace ImOsm {
 
@@ -67,7 +67,7 @@ void TileSourceWidget::paint() {
 }
 
 void TileSourceWidget::updateTileLoader() {
-  if (_ui->source.starts_with("http")) {
+  if (_ui->source.compare(0, 4, "http") == 0) {
     _tileLoader =
         std::make_shared<TileLoaderUrlMap>(_ui->source, _ui->requestLimit);
   } else if (!_ui->source.empty()) {

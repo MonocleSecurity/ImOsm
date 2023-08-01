@@ -27,7 +27,7 @@ public:
 
   struct TileData {
     std::atomic_bool &interrupt;
-    std::vector<std::byte> blob;
+    std::vector<unsigned char> blob;
   };
 
 protected:

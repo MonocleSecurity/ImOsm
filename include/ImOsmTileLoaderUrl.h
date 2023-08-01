@@ -32,7 +32,7 @@ public:
 private:
   struct Tile {
     struct Remote {
-      std::vector<std::byte> blob;
+      std::vector<unsigned char> blob;
       std::shared_ptr<TileTexture> texture;
       CURLcode code{CURLE_OK};
     };

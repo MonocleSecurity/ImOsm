@@ -1,4 +1,9 @@
 #pragma once
+
+#ifdef _WIN32
+  #include <windows.h>
+#endif
+
 #include <GL/gl.h>
 #include <array>
 #include <imgui.h>
@@ -27,7 +32,7 @@ struct TextureColor {
 class TileTexture {
 public:
   TileTexture(int size = 256, TextureColor color = TextureColor::Snow);
-  TileTexture(int size, const std::vector<std::byte> &blob);
+ TileTexture(int size, const std::vector<unsigned char>& blob);
   ~TileTexture();
 
   inline GLuint glID() const {
@@ -40,7 +45,7 @@ public:
 
 private:
   int _width{256}, _height{256}, _channels{};
-  std::vector<std::byte> _blob;
+ std::vector<unsigned char> _blob;
   mutable GLuint _id{0};
 
   void loadTexture() const;

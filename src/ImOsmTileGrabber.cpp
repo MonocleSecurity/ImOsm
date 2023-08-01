@@ -47,8 +47,7 @@ TileGrabber::onLaunchGrab(const double minLat, const double maxLat,
                             _source->request(tile->z(), tile->x(), tile->y());
                           }
                         });
-          std::erase_if(tiles,
-                        [](const auto &tile) { return tile->isDummy(); });
+          tiles.erase(std::remove_if(tiles.begin(), tiles.end(), [](const auto &tile) { return tile->isDummy(); }), tiles.end());
           _source->takeAll(tiles);
           _saver->saveMulti(tiles);
           _tileCounter += tiles.size();

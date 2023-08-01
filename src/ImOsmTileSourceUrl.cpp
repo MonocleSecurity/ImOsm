@@ -32,7 +32,9 @@ bool TileSourceUrl::receiveTile(int z, int x, int y, TileData &tileData) {
   // Open Socket
   curl_easy_setopt(curl, CURLOPT_OPENSOCKETFUNCTION, onOpenSocket);
   curl_easy_setopt(curl, CURLOPT_OPENSOCKETDATA, &tileData);
-  const bool ok{curl_easy_perform(curl) == CURLE_OK};
+  curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+  auto code = curl_easy_perform(curl);
+  const bool ok{code == CURLE_OK};
   curl_easy_cleanup(curl);
 
   return ok;
@@ -42,7 +44,7 @@ size_t onWrite(void *data, size_t size, size_t nmemb, void *userp) {
   auto &tileData{*static_cast<TileSourceAsync::TileData *>(userp)};
   auto &blob{tileData.blob};
   size_t realsize{size * nmemb};
-  auto const *const dataptr{static_cast<std::byte *>(data)};
+  auto const *const dataptr{static_cast<unsigned char *>(data)};
   blob.insert(blob.cend(), dataptr, dataptr + realsize);
   return realsize;
 }

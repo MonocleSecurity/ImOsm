@@ -1,5 +1,6 @@
 #include "ImOsmTileSourceFs.h"
 #include <fstream>
+#include <sstream>
 
 namespace ImOsm {
 TileSourceFs::TileSourceFs(int requestLimit, bool preload,

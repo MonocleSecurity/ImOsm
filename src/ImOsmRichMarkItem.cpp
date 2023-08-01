@@ -1,3 +1,4 @@
+#include <cmath>
 #include <ImOsmRichMarkItem.h>
 
 namespace ImOsm {
