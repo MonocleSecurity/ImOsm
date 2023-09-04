@@ -3,6 +3,7 @@
 #include "ImOsmTile.h"
 #include "ImOsmTileAsync.h"
 #include <algorithm>
+#include <thread>
 
 namespace ImOsm {
 using namespace std::chrono_literals;
